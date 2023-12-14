@@ -1,21 +1,23 @@
-import Card from '../Card/Card';
-import './SectionArticles.css';
+import { View } from 'react-native';
+import CardItem from '../CardItem/CardItem.js';
+import styles from './SectionArticles.style.js';
+import { Text } from 'react-native-paper';
 
 const SectionArticles = (props)=>{
     return(
-        <section>
-            <h1>Mes fabuleux articles : </h1>
+        <View>
+            <Text>Mes fabuleux articles : </Text>
             {/* emplacement de mes cards articles */}
-            <div className='articleList'>
+            <View style={styles.articleList}>
                 {
                     props.articlesProp.articlesApp.map((value,index)=>{
                         return(
-                            <Card key={index} articleInfo={value}/>
+                            <CardItem key={index} articleInfo={value}/>
                         )
                     })
                 }
-            </div>
-        </section>
+            </View>
+        </View>
     )
 }
 export default SectionArticles;

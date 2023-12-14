@@ -1,48 +1,35 @@
 
 
 
-import './CartDetails.css'
+import styles from './CartDetails.style.js'
+import React, { useContext } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import BoutiqueContext from '../../BoutiqueContext';
-import React from 'react';
 
 const CartDetails = (props) => {
-    const boutiqueContext = React.useContext(BoutiqueContext);
+    const boutiqueContext = useContext(BoutiqueContext);
     const articlePanier = boutiqueContext.panier[props.id];
     const article = boutiqueContext.articlesApp[articlePanier.id];
 
-
     return (
-        <div className='cartDetails'>
-            <span className='iconCartDetails'>
-                <img src={article.url} alt="" />
-            </span>
-            <span>
-                {article.name}
-            </span>
-            <span>
-                <button type="input" value={"Remove"}
-                onClick={
-                    () => {
-                        boutiqueContext.qteIncrement(articlePanier.id);
-                    }}>-</button>
-            </span>
-            <span>
-                {articlePanier.qte}
-            </span>
-            <span>
-                <button type="input" value={"Add"}
-                onClick={
-                    () => {
-                        boutiqueContext.qteDecrement(articlePanier.id);
-                    }}
-                    disabled={article.qte <= 0 ? true : false}
-                >+</button>
-            </span>
-            <span>
-                {article.price * articlePanier.qte} £
-            </span>
-        </div>
+        <View style={styles.cartDetails}>
+            <View style={styles.iconCartDetails}>
+                <Image source={{ uri: article.url }} style={styles.iconImage} />
+            </View>
+            <Text>{article.name}</Text>
+            <TouchableOpacity onPress={() => boutiqueContext.qteIncrement(articlePanier.id)}>
+                <Text style={styles.cartDetailsText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.cartDetailsText}>{articlePanier.qte}</Text>
+            <TouchableOpacity
+                onPress={() => boutiqueContext.qteDecrement(articlePanier.id)}
+                disabled={article.qte <= 0}
+            >
+                <Text style={styles.cartDetailsText}>+</Text>
+            </TouchableOpacity>
+            <Text>{article.price * articlePanier.qte} £</Text>
+        </View>
     );
-}
+};
 
 export default CartDetails;

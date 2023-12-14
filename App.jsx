@@ -8,6 +8,8 @@ import {
 import { Header } from './components/Header/Header';
 import articles from './articles';
 import BoutiqueContext from './BoutiqueContext';
+import SectionArticles from './components/SectionArticles/SectionArticles';
+import Cart from './components/Cart/Cart';
 
 
 
@@ -16,7 +18,7 @@ function App() {
     const[state, setState] = React.useState({
         articlesApp: articles,
         panier: [],
-        //totalPrice: 0
+        totalPrice: 0
     })
 
     /**
@@ -93,9 +95,8 @@ function App() {
             <SafeAreaView>
                 <ScrollView>
                     <Header></Header>
-                    <Text style={styles.exempleText}>
-                        Hello World !
-                    </Text>
+                    <Cart panierLength={state.panier.length} panierCost={state.totalPrice}>Texte du titre pour le composant Cart</Cart>
+                    <SectionArticles articlesProp={state} />
                 </ScrollView>
             </SafeAreaView>
         </BoutiqueContext.Provider>
