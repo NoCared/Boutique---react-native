@@ -14,7 +14,7 @@ const CartDetails = (props) => {
     return (
         <View style={styles.cartDetails}>
             <View style={styles.iconCartDetails}>
-                <Image source={{ uri: article.url }} style={styles.iconImage} />
+                <Image source={article.url } style={styles.iconImage} />
             </View>
             <Text>{article.name}</Text>
             <TouchableOpacity onPress={() => boutiqueContext.qteIncrement(articlePanier.id)}>
